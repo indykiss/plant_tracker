@@ -1,0 +1,18 @@
+
+<h1><%= current_user.username %>'s plants:</h1>
+
+<% if current_user.plants != [] %>
+  <ul>
+    <% current_user.plants.each do |plant| %>
+      <li><a href="/tweets/<%= plant.id %>"><%= plant.name %><%= plant.type %>
+      <%= plant.water_needed %><%= plant.light_needed %>
+      </a></li>
+    <% end %>
+  </ul>
+<% else %>
+  You don't have any plants.
+  <br>
+<% end %>
+
+<br>
+
