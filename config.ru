@@ -9,6 +9,6 @@ end
 
 use Rack::MethodOverride
 
-use UserController
-use TravelController
+use UsersController
+use PlantsController
 run ApplicationController

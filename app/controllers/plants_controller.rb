@@ -19,7 +19,7 @@ class PlantsController < ApplicationController
 
    post '/plants' do
       if logged_in? && params[:plant][:name] != ""
-        @plant = Plant.create(params[:plant)
+        @plant = Plant.create(params[:plant])
         @plant.user = current_user
         @plant.save
         redirect "/plants/#{@plant.id}"
@@ -71,6 +71,4 @@ class PlantsController < ApplicationController
   end
 
 
-end 
-
-
+end
