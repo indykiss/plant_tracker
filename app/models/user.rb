@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :locations
+  has_many :plants
   has_secure_password
   validates_presence_of :email, :username, :password
 
@@ -9,8 +9,7 @@ class User < ActiveRecord::Base
   end 
     
   def self.find_by_slug(slug) 
-     self.all.find{
-       |artist| artist.slug == slug}
+     self.all.find{|plant| plant.slug == slug}
   end 
 
 
