@@ -1,1 +1,14 @@
 
+<h1> Add a plant here. </h1>
+
+<form action='/plants' method="POST">
+  <label>Plant name:</label>
+    <input type="text" id="name" name="plant[name]">
+  <label>Plant Type:</label>
+    <input type="text" id="type" name="plant[type]">
+  <label>Water needed:</label>
+    <input type="text" id="water_needed" name="plant[water_needed]">
+  <label>Light needed:</label>
+    <input type="text" id="light_needed" name="plant[light_needed]">
+  <button type="submit" value="submit">Add Plant</button>
+</form>

@@ -1,1 +1,16 @@
+<h1>Plant #<%= @plant.name %></h1>
+
+<h2><%= @plant.type %>
+<%= @plant.water_needed %>
+<%= @plant.light_needed %> </h2>
+
+
+<form method="GET" action="/plants/<%= @plant.id %>/edit">
+  <input type = "submit" value="Edit Plant">
+</form>
+
+<form method="POST" action="/plants/<%= @plant.id %>/delete">
+  <input type = "hidden" id="hidden" name="_method" value="delete"/>
+  <input type = "submit" value="Delete Plant"/>
+</form>
 
