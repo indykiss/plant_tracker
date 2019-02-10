@@ -19,7 +19,7 @@ class PlantsController < ApplicationController
 
    post '/plants' do
       if logged_in? && params[:plant][:name] != ""
-        @plant = Plant.create(params[:plant])
+        @plant = Plant.create(params[:name])
         @plant.user = current_user
         @plant.save
         redirect "/plants/#{@plant.id}"
@@ -54,7 +54,7 @@ class PlantsController < ApplicationController
     @plant = Plant.find_by_id(params[:id])
     if params[:plant][:name] != ""
       @plant.update(params[:plant])
-      redirect "/plants/#{@tweet.id}"
+      redirect "/plants/#{@plant.id}"
     elsif params[:plant][:name] == ""
       redirect "/plants/#{@plant.id}/edit"
     end

@@ -3,19 +3,18 @@
 
 <form action='/plants/<%= @plant.id %>' method="POST">
   <input type="hidden" id="hidden" name="_method" value="patch">
-  
+
   <label>Plant name:</label>
-    <input type="text" id="name" name="plant[name]" value="<%= @plant.name %>">
+    <input type="text" id="name" name="plant[name]" value="<%= @plant.name %>"><br>
   <label>Plant Type:</label>
-    <input type="text" id="type" name="plant[type]" value="<%= @plant.type %>">
+    <input type="text" id="type" name="plant[type]" value="<%= @plant.type %>"><br>
   <label>Water needed:</label>
-    <input type="text" id="water_needed" name="plant[water_needed]" value="<%= @plant.water_needed %>">
+    <input type="text" id="water_needed" name="plant[water_needed]" value="<%= @plant.water_needed %>"><br>
   <label>Light needed:</label>
-    <input type="text" id="light_needed" name="plant[light_needed]" value="<%= @plant.light_needed %>">
+    <input type="text" id="light_needed" name="plant[light_needed]" value="<%= @plant.light_needed %>"><br>
   <button type="submit" value="submit">Edit Plant</button>
 </form>
 
 <a href="/plants">Home</a><br>
 <a href="/users/<%= current_user.slug %>">My plants</a><br>
 <a href="/logout">Log Out</a>
-
