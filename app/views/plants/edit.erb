@@ -5,13 +5,13 @@
   <input type="hidden" id="hidden" name="_method" value="patch">
 
   <label>Plant name:</label>
-    <input type="text" id="name" name="plant[name]" value="<%= @plant.name %>"><br>
+    <input type="text" name="plant[name]" value="<%= @plant.name %>"><br>
   <label>Plant Type:</label>
-    <input type="text" id="type" name="plant[type]" value="<%= @plant.type %>"><br>
+    <input type="text"  name="plant[type]" value="<%= @plant.type %>"><br>
   <label>Water needed:</label>
-    <input type="text" id="water_needed" name="plant[water_needed]" value="<%= @plant.water_needed %>"><br>
+    <input type="text" name="plant[water_needed]" value="<%= @plant.water_needed %>"><br>
   <label>Light needed:</label>
-    <input type="text" id="light_needed" name="plant[light_needed]" value="<%= @plant.light_needed %>"><br>
+    <input type="text"  name="plant[light_needed]" value="<%= @plant.light_needed %>"><br>
   <button type="submit" value="submit">Edit Plant</button>
 </form>
 
