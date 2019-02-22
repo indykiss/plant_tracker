@@ -3,7 +3,7 @@ class PlantsController < ApplicationController
   get "/plants" do
     if logged_in?
       @plants = Plant.all
-      erb :"/plants/index"
+      erb :"plants/index"
     else
       redirect "/login"
     end
@@ -11,13 +11,24 @@ class PlantsController < ApplicationController
 
   get "/plants/new" do
     if logged_in?
-      erb :"/plants/new"
+      erb :"plants/new"
      else
       redirect "/login"
     end
   end
 
-   post '/plants' do
+  get '/plants/:id/edit' do
+    @plant = Plant.find(params[:id])
+    if logged_in? && @plant.user == current_user
+      erb :'plants/edit'
+    elsif logged_in? && @plant.user != current_user
+      redirect "/plants"
+    else
+      redirect "/login"
+    end
+  end
+
+   post '/plants/:id' do
       if logged_in? && params[:plant][:name] != ""
         @plant = Plant.create(params[:name])
         @plant.user = current_user
@@ -32,22 +43,16 @@ class PlantsController < ApplicationController
 
   get '/plants/:id' do
     if logged_in?
-      @plant = Plant.find_by_id(params[:id])
-      erb :'/plants/show'
+      @plant = Plant.find(params[:id])
+      erb :'plants/show'
     else
       redirect "/login"
     end
   end
 
-  get '/plants/:id/edit' do
-    @plant = Plant.find_by_id(params[:id])
-    if logged_in? && @plant.user == current_user
-      erb :'/plants/edit_tweet'
-    elsif logged_in? && @plant.user != current_user
-      redirect "/plants"
-    else
-      redirect "/login"
-    end
+  get "/plants/:id" do
+    @plant = Plant.find(params[:id])
+    erb :'plants/show'
   end
 
   patch '/plants/:id' do
