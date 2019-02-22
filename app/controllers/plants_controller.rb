@@ -55,11 +55,6 @@ class PlantsController < ApplicationController
 #    end
   end
 
-  get "/plants/:id" do
-    @plant = Plant.find(params[:id])
-    erb :'plants/show'
-  end
-
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
   #  if params[:plant][:name] != ""
