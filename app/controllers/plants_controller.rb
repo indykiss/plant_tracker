@@ -1,59 +1,61 @@
 class PlantsController < ApplicationController
 
   get "/plants" do
-  #  if logged_in?
+    if logged_in?
       @plants = Plant.all
       erb :"plants/index"
-#    else
-#      redirect "/login"
-#    end
+    else
+      redirect "/login"
+    end
   end
 
   get "/plants/new" do
-    #if logged_in?
+    if logged_in?
       erb :"plants/new"
-     #else
-      #redirect "/login"
-    #end
+      #binding.pry
+     else
+      redirect "/login"
+    end
   end
 
-  post '/plants' do
-    @plant = Plant.create(params[:name])
-    erb :'plants/show'
+  get '/plants/:id' do
+    if logged_in?
+      @plant = Plant.find(params[:id])
+      erb :'plants/show'
+    else
+      redirect "/login"
+    end
   end
 
   get '/plants/:id/edit' do
-    @plant = Plant.find(params[:id])
-  #  if logged_in? && @plant.user == current_user
-      erb :'plants/edit'
+    if logged_in? && @plant.user == current_user
+      @plant = Plant.find(params[:id])
+        erb :'plants/edit'
 #    elsif logged_in? && @plant.user != current_user
 #      redirect "/plants"
-#    else
-#      redirect "/login"
-#    end
+    else
+      redirect "/login"
+    end
   end
 
-   post '/plants/:id' do
+  post '/plants' do
+    @plant = Plant.create(name: params[:name], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
+    erb :'plants/show'
+    binding.pry
+  end
+
+   #post '/plants/:id' do
   #    if logged_in? && params[:plant][:name] != ""
-        @plant = Plant.create(params[:name])
-        @plant.user = current_user
-        @plant.save
-        redirect "/plants/#{@plant.id}"
+  #      @plant = Plant.create(name: params[:username], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
+  #      @plant.user = current_user
+  #      @plant.save
+  #      redirect "/plants/#{@plant.id}"
   #    elsif logged_in? && params[:plant][:name] == ""
   #      redirect "/plants/new"
   #    else
   #      redirect "/login"
   #    end
-    end
-
-  get '/plants/:id' do
-  #  if logged_in?
-      @plant = Plant.find(params[:id])
-      erb :'plants/show'
-#    else
-#      redirect "/login"
-#    end
-  end
+  #  end
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
@@ -66,7 +68,7 @@ class PlantsController < ApplicationController
   end
 
   delete '/plants/:id/delete' do
-    @plant = Plant.find_by_id(params[:id])
+    @plant = Plant.find_by(params[:id])
     if logged_in? && @plant.user == current_user
       @plant.delete
       redirect "/plants"
