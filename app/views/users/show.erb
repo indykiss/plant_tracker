@@ -4,7 +4,7 @@
 <% if current_user.plants != [] %>
   <ul>
     <% current_user.plants.each do |plant| %>
-      <li><a href="/tweets/<%= plant.id %>"><%= plant.name %><%= plant.type %>
+      <li><a href="/plants/<%= plant.id %>"><%= plant.name %>
       <%= plant.water_needed %><%= plant.light_needed %>
       </a></li>
     <% end %>
@@ -15,4 +15,3 @@
 <% end %>
 
 <br>
-

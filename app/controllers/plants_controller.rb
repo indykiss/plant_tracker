@@ -39,14 +39,14 @@ class PlantsController < ApplicationController
   end
 
   post '/plants' do
-    @plant = Plant.create(name: params[:name], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
+    @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
     erb :'plants/show'
     #binding.pry
   end
 
   post '/plants/:id' do
       if logged_in? && params[:plant][:name] != ""
-        @plant = Plant.create(name: params[:name], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
+        @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
         @plant.user = current_user
         @plant.save
         redirect "/plants/#{@plant.id}"
