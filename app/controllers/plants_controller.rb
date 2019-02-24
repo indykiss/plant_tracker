@@ -39,7 +39,7 @@ class PlantsController < ApplicationController
   end
 
   post '/plants' do
-    @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
+    @plant = Plant.create(params)
     erb :'plants/show'
     #binding.pry
   end
@@ -55,7 +55,7 @@ class PlantsController < ApplicationController
       else
         redirect "/login"
       end
-    end
+  end
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
