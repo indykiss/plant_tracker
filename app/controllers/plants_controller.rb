@@ -41,21 +41,21 @@ class PlantsController < ApplicationController
   post '/plants' do
     @plant = Plant.create(name: params[:name], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
     erb :'plants/show'
-    binding.pry
+    #binding.pry
   end
 
-   #post '/plants/:id' do
-  #    if logged_in? && params[:plant][:name] != ""
-  #      @plant = Plant.create(name: params[:username], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
-  #      @plant.user = current_user
-  #      @plant.save
-  #      redirect "/plants/#{@plant.id}"
-  #    elsif logged_in? && params[:plant][:name] == ""
-  #      redirect "/plants/new"
-  #    else
-  #      redirect "/login"
-  #    end
-  #  end
+  post '/plants/:id' do
+      if logged_in? && params[:plant][:name] != ""
+        @plant = Plant.create(name: params[:name], type: params[:type], water_needed: params[:water_needed], light_needed: params[:light_needed])
+        @plant.user = current_user
+        @plant.save
+        redirect "/plants/#{@plant.id}"
+      elsif logged_in? && params[:plant][:name] == ""
+        redirect "/plants/#{@plant.id}"
+      else
+        redirect "/login"
+      end
+    end
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
