@@ -4,6 +4,7 @@ class CreateDecorations < ActiveRecord::Migration
     create_table :decorations do |t|
       t.string :dec_name
       t.string :color
+      t.integer :plants_id
     end
   end
 end
