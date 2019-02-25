@@ -1,0 +1,16 @@
+
+<h1> Edit a decoration here. </h1>
+
+<form action='/decorations/<%= @decoration.id %>' method="POST">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+  <label>Decoration name:</label>
+    <input type="text" name="dec_name" value="<%= @decoration.dec_name %>"><br>
+  <label>Decoration color:</label>
+    <input type="text" name="color" value="<%= @decoration.color %>"><br>
+  <input type="submit" value="Update">
+</form>
+
+<a href="/plants">Home</a><br>
+<a href="/users/<%= current_user.slug %>">My plants</a><br>
+<a href="/logout">Log Out</a>

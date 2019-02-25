@@ -1,0 +1,12 @@
+
+<h1><%= "Welcome, #{current_user.username.capitalize}" %> </h1>
+<br><h2>Here are your decorations</h2><br>
+
+<% Decoration.all.each do |decoration| %>
+<%= decoration.dec_name %><br>
+<%= decoration.color %><br>
+<br><br>
+<% end %>
+
+<h2> Add a decoration  here: </h2>
+<a href="/decorations/new">New Decoration</a><br>

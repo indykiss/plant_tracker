@@ -46,12 +46,12 @@ class DecorationsController < ApplicationController
   end
 
   post '/decorations/:id' do
-      if logged_in? && params[:decoration][:name] != ""
-        @decoration = Decoration.create(name: params[:name], color: params[:color])
+      if logged_in? && params[:decoration][:dec_name] != ""
+        @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
         @decoration.user = current_user
         @decoration.save
         redirect "/decorations/#{@decoration.id}"
-      elsif logged_in? && params[:decoration][:name] == ""
+      elsif logged_in? && params[:decoration][:dec_name] == ""
         redirect "/decorations/#{@decoration.id}"
       else
         redirect "/login"
@@ -60,10 +60,10 @@ class DecorationsController < ApplicationController
 
   patch '/decorations/:id' do
     @decoration = Decoration.find(params[:id])
-  #  if params[:decoration][:name] != ""
+  #  if params[:decoration][:dec_name] != ""
       @decoration.update(params[:decoration])
       redirect "/decorations/#{@decoration.id}"
-  #  elsif params[:decoration][:name] == ""
+  #  elsif params[:decoration][:dec_name] == ""
   #    redirect "/decorations/#{@decoration.id}/edit"
   #  end
   end
