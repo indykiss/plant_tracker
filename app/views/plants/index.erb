@@ -1,13 +1,11 @@
 
-
-<h1> Here are all of your plants. </h1>
-
-<%= "Welcome, #{current_user.username}" %>
+<h1><%= "Welcome, #{current_user.username.capitalize}" %> </h1>
+<br><h2>Here are your plants</h2><br>
 
 <% Plant.all.each do |plant| %>
-<%= plant.name %>
-<%= plant.water_needed %>
-<%= plant.light_needed %>
+<%= plant.name %><br>
+<%= plant.water_needed %><br>
+<%= plant.light_needed %><br>
 <br><br>
 <% end %>
 

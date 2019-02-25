@@ -1,5 +1,5 @@
 class Plant < ActiveRecord::Base
   belongs_to :user
-  validates_presence_of :type
+  validates_presence_of :name
 
-end 
+end
