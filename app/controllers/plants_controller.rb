@@ -12,7 +12,6 @@ class PlantsController < ApplicationController
   get "/plants/new" do
     if logged_in?
       erb :"plants/new"
-      #binding.pry
      else
       redirect "/login"
     end
