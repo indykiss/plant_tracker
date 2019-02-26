@@ -28,8 +28,9 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id/edit' do
-    #if logged_in? && @plant.user == current_user
+    if logged_in?
       @plant = Plant.find_by(params[:id])
+
         erb :'plants/edit'
 #    elsif logged_in? && @plant.user != current_user
 #      redirect "/plants"
