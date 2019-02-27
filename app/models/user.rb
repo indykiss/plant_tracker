@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :username, :password
 
 
-  #def slug 
+  #def slug
   #  self.name.gsub(" ", "-").downcase
-  #end 
+  #end
 
-  #def self.find_by_slug(slug) 
+  #def self.find_by_slug(slug)
   #   self.all.find{|plant| plant.slug == slug}
-  #end 
+  #end
 
 
 end

@@ -15,3 +15,18 @@
 <% end %>
 
 <br>
+
+<% if current_user.decorations != [] %>
+  <ul>
+    <% current_user.decorations.each do |plant| %>
+      <li><a href="/decorations/<%= plant.id %>"><%= decoration.dec_name %>
+      <%= decoration.color %> Belongs to <%= decoration.plant.name%>
+      </a></li>
+    <% end %>
+  </ul>
+<% else %>
+  You don't have any decorations.
+  <br>
+<% end %>
+
+<br>

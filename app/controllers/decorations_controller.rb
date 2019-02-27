@@ -12,11 +12,17 @@ class DecorationsController < ApplicationController
   end
 
   get "/decorations/new" do
-    if logged_in?
+  #  if logged_in?
       erb :"decorations/new"
-     else
-      redirect "/login"
-    end
+  #   else
+  #    redirect "/login"
+#    end
+  end
+
+  post '/decorations' do
+    @decoration = Decoration.create(params)
+    erb :'decorations/show'
+    #binding.pry
   end
 
   get '/decorations/:id' do
@@ -29,7 +35,7 @@ class DecorationsController < ApplicationController
   end
 
   get '/decorations/:id/edit' do
-    if logged_in? && @decoration.user == current_user
+    if logged_in? #&& @decoration.user == current_user
       @decoration = Decoration.find(params[:id])
         erb :'decorations/edit'
 #    elsif logged_in? && @decoration.user != current_user
@@ -39,22 +45,22 @@ class DecorationsController < ApplicationController
     end
   end
 
-  post '/decorations' do
-    @decoration = Decoration.create(params)
-    erb :'decorations/show'
-    #binding.pry
-  end
-
   post '/decorations/:id' do
-      if logged_in? && params[:decoration][:dec_name] != ""
-        @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
-        @decoration.user = current_user
-        @decoration.save
-        redirect "/decorations/#{@decoration.id}"
-      elsif logged_in? && params[:decoration][:dec_name] == ""
-        redirect "/decorations/#{@decoration.id}"
-      else
-        redirect "/login"
+    if logged_in?
+    @decoration = Decoration.find(params[:id])
+
+    @decoration.update(params.select{|k|k=="dec_name" || k=="color"})
+    redirect "/decorations/#{@decoration.id}"
+
+    #  if logged_in? #&& params[:decoration][:dec_name] != ""
+    #    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
+    #    @decoration.user = current_user
+  #      @decoration.save
+#        redirect "/decorations/#{@decoration.id}"
+#      elsif logged_in? && params[:decoration][:dec_name] == ""
+#        redirect "/decorations/#{@decoration.id}"
+#      else
+  #      redirect "/login"
       end
   end
 

@@ -4,9 +4,9 @@
 
 <% Decoration.all.each do |decoration| %>
 <%= decoration.dec_name %><br>
-<%= decoration.color %><br>
+<a href="/decorations/<%=decoration.id%>/edit">Edit</a>
 <br><br>
 <% end %>
 
-<h2> Add a decoration  here: </h2>
+<h2> Add a new decoration  here: </h2>
 <a href="/decorations/new">New Decoration</a><br>
