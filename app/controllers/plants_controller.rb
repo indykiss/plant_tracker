@@ -24,24 +24,24 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id' do
-    #if logged_in?
-      @plant = Plant.find_by(params[:id])
+    if logged_in?
+      @plant = Plant.find(params[:id])
       erb :'plants/show'
-    #else
-    #  redirect "/login"
-    #end
+    else
+      redirect "/login"
+    end
   end
 
   get '/plants/:id/edit' do
-    #if logged_in?
-      @plant = Plant.find_by(params[:id])
+    if logged_in?
+      @plant = Plant.find(params[:id])
 
         erb :'plants/edit'
 #    elsif logged_in? && @plant.user != current_user
 #      redirect "/plants"
-#    else
-  #    redirect "/login"
-#    end
+    else
+      redirect "/login"
+    end
   end
 
   post '/plants/:id' do
@@ -66,16 +66,16 @@ class PlantsController < ApplicationController
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
   #  if params[:plant][:name] != ""
-      @plant.update(params[:plant])
+      @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed] )
       redirect "/plants/#{@plant.id}"
   #  elsif params[:plant][:name] == ""
   #    redirect "/plants/#{@plant.id}/edit"
   #  end
   end
 
-  delete '/plants/:id/delete' do
-    @plant = Plant.find_by(params[:id])
-    if logged_in? && @plant.user == current_user
+  get '/plants/:id/delete' do
+    if logged_in?
+      @plant = Plant.find_by(params[:id])
       @plant.delete
       redirect "/plants"
     else

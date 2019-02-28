@@ -1,4 +1,4 @@
-require './config/environment'
+
 
 class DecorationsController < ApplicationController
 
@@ -12,11 +12,11 @@ class DecorationsController < ApplicationController
   end
 
   get "/decorations/new" do
-  #  if logged_in?
+    if logged_in?
       erb :"decorations/new"
-  #   else
-  #    redirect "/login"
-#    end
+     else
+      redirect "/login"
+    end
   end
 
   post '/decorations' do
@@ -35,10 +35,11 @@ class DecorationsController < ApplicationController
   end
 
   get '/decorations/:id/edit' do
-    if logged_in? #&& @decoration.user == current_user
+    if logged_in?
       @decoration = Decoration.find(params[:id])
+
         erb :'decorations/edit'
-#    elsif logged_in? && @decoration.user != current_user
+#    elsif logged_in? && @plant.user != current_user
 #      redirect "/decorations"
     else
       redirect "/login"
@@ -52,31 +53,31 @@ class DecorationsController < ApplicationController
     @decoration.update(params.select{|k|k=="dec_name" || k=="color"})
     redirect "/decorations/#{@decoration.id}"
 
-    #  if logged_in? #&& params[:decoration][:dec_name] != ""
-    #    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
-    #    @decoration.user = current_user
-  #      @decoration.save
-#        redirect "/decorations/#{@decoration.id}"
-#      elsif logged_in? && params[:decoration][:dec_name] == ""
-#        redirect "/decorations/#{@decoration.id}"
-#      else
-  #      redirect "/login"
+  #    if logged_in? && params[:plant][:name] != ""
+  #      @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
+  #      @plant.user = current_user
+  #      @plant.save
+  #      redirect "/decorations/#{@plant.id}"
+  #    elsif logged_in? && params[:plant][:name] == ""
+  #      redirect "/decorations/#{@plant.id}"
+      else
+        redirect "/login"
       end
   end
 
   patch '/decorations/:id' do
     @decoration = Decoration.find(params[:id])
-  #  if params[:decoration][:dec_name] != ""
-      @decoration.update(params[:decoration])
+  #  if params[:plant][:name] != ""
+      @decoration.update(dec_name: params[:dec_name], color: params[:color])
       redirect "/decorations/#{@decoration.id}"
-  #  elsif params[:decoration][:dec_name] == ""
-  #    redirect "/decorations/#{@decoration.id}/edit"
+  #  elsif params[:plant][:name] == ""
+  #    redirect "/decorations/#{@plant.id}/edit"
   #  end
   end
 
-  delete '/decorations/:id/delete' do
-    @decoration = Decoration.find(params[:id])
-    if logged_in? && @decoration.user == current_user
+  get '/decorations/:id/delete' do
+    if logged_in?
+      @decoration = Decoration.find_by(params[:id])
       @decoration.delete
       redirect "/decorations"
     else

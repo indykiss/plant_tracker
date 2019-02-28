@@ -4,7 +4,8 @@
 
 <% Plant.all.each do |plant| %>
 <%= plant.name %><br>
-<a href="/plants/<%=plant.id%>/edit">Edit</a>
+<a href="/plants/<%=plant.id %>/edit">Edit</a>
+<a href="/plants/<%=plant.id %>/delete">Delete</a>
 <br><br>
 <% end %>
 
