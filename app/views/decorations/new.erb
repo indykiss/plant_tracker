@@ -1,18 +1,10 @@
 
-<h1> Add a decoration here </h1>
+<h1> Add a decoration here. </h1>
 
 <form action='/decorations' method="POST">
   <label>Decoration name:</label>
     <input type="text" name="dec_name"><br>
-  <label>Decoration color:</label>
+  <label>Color:</label>
     <input type="text" name="color"><br>
-
-    <label> Which plant does this belong in? </label>
-    <select name="plant_id">
-      <% current_user.plants.each do |plant| %>
-        <option value=<%=plant.id %>><%= plant.name %></option>
-      <% end %>
-    </select>
-
 <input type="submit" value="Create">
 </form>
