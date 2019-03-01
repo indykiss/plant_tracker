@@ -10,5 +10,6 @@ end
 use Rack::MethodOverride
 
 use UsersController
+use DecorationsController
 use PlantsController
 run ApplicationController

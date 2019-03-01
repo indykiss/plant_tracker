@@ -5,6 +5,16 @@
   <label>Decoration name:</label>
     <input type="text" name="dec_name"><br>
   <label>Color:</label>
-    <input type="text" name="color"><br>
+    <input type="text" name="color"><br><br>
+
+    <label> Which plant does this belong in? </label>
+    <select name="plant_id">
+      <% current_user.plants.each do |plant| %>
+        <option value=<%=plant.id %>
+        <%= "selected" if plant.id==@decoration.plant.id %> ><%= plant.name %></option>
+      <% end %>
+    </select>
+
+
 <input type="submit" value="Create">
 </form>

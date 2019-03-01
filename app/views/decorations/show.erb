@@ -2,11 +2,12 @@
 
 <h1> Your Decoration </h1>
 
-<h2> <%= @decoration.dec_name %> </h2>
-<h2> <%= @decoration.color %> </h2>
+<h2> Name: <%= @decoration.dec_name %> </h2>
+<h2> Color: <%= @decoration.color %> </h2>
 
+<br>
 <h3> Add another new decoration here: </h3>
 <a href="/decorations/new">New decoration</a><br>
-
+<br>
 <h3> Edit this decoration here: </h3>
 <a href="/decorations/<%=@decoration.id%>/edit">Edit decoration</a><br>
