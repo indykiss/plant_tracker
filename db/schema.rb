@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 3) do
     t.string  "water_needed"
     t.string  "light_needed"
     t.integer "user_id"
-    t.integer "decorations_id"
   end
 
   create_table "users", force: :cascade do |t|
