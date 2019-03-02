@@ -13,3 +13,9 @@
 <br>
   <input type="submit" value="Update">
 </form>
+
+<h2> These are this plant's decorations </h2>
+<% @plant.decorations.each do |decoration| %>
+    <li><a href="/decorations/<%=decoration.id%>"><%= decoration.dec_name %></a></li>
+  <% end%>
+  </ul>
