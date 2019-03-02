@@ -8,13 +8,14 @@
   <label>Decoration color:</label>
     <input type="text" name="color" value="<%= @decoration.color %>"><br>
 
-  <label> Which plant does this belong in? </label>
-  <select name="plant_id">
-    <% current_user.plants.each do |plant| %>
-      <option value=<%=plant.id %>
-      <%= "selected" if plant.id==@decoration.plant.id %> ><%= plant.name %></option>
-    <% end %>
-  </select>
+    <label> Which plant does this belong in? </label>
+    <select name="plant_id">
+      <% current_user.plants.each do |plant| %>
+        <option value= <%=plant.id %>
+        <%= "selected" if plant.id==@decoration.plant.id %> >
+        <%= plant.name %></option>
+      <% end %>
+    </select>
 
 
   <input type="submit" value="Update">

@@ -3,7 +3,7 @@
 <br><h2>Here are your decorations</h2><br>
 
 <% Decoration.all.each do |decoration| %>
-<%= decoration.name %><br>
+<%= decoration.dec_name %><br>
 <a href="/decorations/<%=decoration.id %>/edit">Edit</a>
 <a href="/decorations/<%=decoration.id %>/delete">Delete</a>
 <br><br>
