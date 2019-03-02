@@ -20,7 +20,6 @@ class PlantsController < ApplicationController
   post '/plants' do
     @plant = Plant.create(params)
     erb :'plants/show'
-    #binding.pry
   end
 
   get '/plants/:id' do

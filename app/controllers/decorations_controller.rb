@@ -19,15 +19,12 @@ class DecorationsController < ApplicationController
 
   post '/decorations' do
     @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
-    binding.pry
-
     erb :'decorations/show'
   end
 
   get '/decorations/:id' do
     if logged_in?
       @decoration = Decoration.find(params[:id])
-    #  binding.pry
       erb :'decorations/show'
     else
       redirect "/login"
@@ -59,7 +56,6 @@ class DecorationsController < ApplicationController
   #      redirect "/decorations/#{@plant.id}"
   #    elsif logged_in? && params[:plant][:name] == ""
   #      redirect "/decorations/#{@plant.id}"
-
       else
         redirect "/login"
       end
