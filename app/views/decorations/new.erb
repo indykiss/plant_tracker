@@ -4,14 +4,15 @@
 <form action='/decorations' method="POST">
   <label>Decoration name:</label>
     <input type="text" name="dec_name"><br>
+
   <label>Color:</label>
     <input type="text" name="color"><br><br>
 
-    <label> Which plant does this belong in? </label>
+  <label> Which plant does this belong in? </label>
     <% Plant.all.each do |plant| %>
-     <input type="radio" name="plants_id" id="<%=plant.id %>"
-     value="<%=plant.id%>"><label><%=plant.name %></label></input>
-     <%end%>
+     <input type="radio" name="plant_id" value="<%=plant.id%>">
+     <label><%=plant.name %></label>
+   <%end%>
 
 <input type="submit" value="Create">
 </form>
