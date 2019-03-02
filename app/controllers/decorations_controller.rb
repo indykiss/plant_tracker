@@ -25,6 +25,7 @@ class DecorationsController < ApplicationController
   get '/decorations/:id' do
     if logged_in?
       @decoration = Decoration.find(params[:id])
+  #  binding.pry
       erb :'decorations/show'
     else
       redirect "/login"
@@ -46,7 +47,7 @@ class DecorationsController < ApplicationController
     if logged_in?
     @decoration = Decoration.find(params[:id])
 
-    @decoration.update(params.select{|k|k=="dec_name" || k=="color" || k=="plant_id"})
+    #@decoration.update(params.select{|k|k=="dec_name" || k=="color" || k=="plant_id"})
     redirect "/decorations/#{@decoration.id}"
 
   #    if logged_in? && params[:plant][:name] != ""

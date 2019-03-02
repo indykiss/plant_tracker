@@ -8,7 +8,6 @@ if defined?(ActiveRecord::Migrator) && ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-
 use UsersController
 use DecorationsController
 use PlantsController
