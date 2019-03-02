@@ -12,7 +12,7 @@
     <select name="plant_id">
       <% current_user.plants.each do |plant| %>
         <option value= <%=plant.id %>
-        <%= "selected" if plant.id==@decoration.plant.id %> >
+        <%= "selected" if plant.id == @decoration.plant.id %> >
         <%= plant.name %></option>
       <% end %>
     </select>
