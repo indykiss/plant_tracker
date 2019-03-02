@@ -10,8 +10,9 @@
 
     <label> Which plant does this belong in? </label>
       <% Plant.all.each do |plant| %>
-        <input type="radio" name="plant_id" id="<%=plant.id %>"
-        value="<%=plant.id%>"><label><%=plant.name %></label></input>
+        <input type="radio" name="plant_id"
+        value="<%=plant.id%>" checked="checked">
+        <label><%=plant.name %></label>
        <%end%>
 
   <input type="submit" value="Update">

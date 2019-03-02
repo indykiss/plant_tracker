@@ -18,8 +18,9 @@ class DecorationsController < ApplicationController
   end
 
   post '/decorations' do
-    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
+    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
     binding.pry
+
     erb :'decorations/show'
   end
 
@@ -36,7 +37,6 @@ class DecorationsController < ApplicationController
   get '/decorations/:id/edit' do
     if logged_in?
       @decoration = Decoration.find(params[:id])
-
         erb :'decorations/edit'
 #    elsif logged_in? && @plant.user != current_user
 #      redirect "/decorations"
@@ -49,7 +49,7 @@ class DecorationsController < ApplicationController
     if logged_in?
     @decoration = Decoration.find(params[:id])
 
-    @decoration.update(params.select{|k|k=="dec_name" || k=="color"})
+    @decoration.update(params.select{|k|k=="dec_name" || k=="color" || k=="plant_id"})
     redirect "/decorations/#{@decoration.id}"
 
   #    if logged_in? && params[:plant][:name] != ""
@@ -68,7 +68,7 @@ class DecorationsController < ApplicationController
   patch '/decorations/:id' do
     @decoration = Decoration.find(params[:id])
   #  if params[:plant][:name] != ""
-      @decoration.update(dec_name: params[:dec_name], color: params[:color])
+      @decoration.update(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
       redirect "/decorations/#{@decoration.id}"
   #  elsif params[:plant][:name] == ""
   #    redirect "/decorations/#{@plant.id}/edit"
