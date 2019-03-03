@@ -35,7 +35,6 @@ class DecorationsController < ApplicationController
   get '/decorations/:id/edit' do
     if logged_in?
       @decoration = Decoration.find(params[:id])
-      binding.pry
         erb :'decorations/edit'
 #    elsif logged_in? && @plant.user != current_user
 #      redirect "/decorations"
