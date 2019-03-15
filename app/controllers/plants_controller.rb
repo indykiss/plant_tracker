@@ -23,8 +23,8 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id' do
+    @plant = Plant.find(params[:id])
     if logged_in?
-      @plant = Plant.find(params[:id])
       erb :'plants/show'
     else
       redirect "/login"
@@ -32,23 +32,34 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id/edit' do
-    if logged_in?
-      @plant = Plant.find(params[:id])
+    @plant = Plant.find(params[:id])
+    binding.pry
 
-        erb :'plants/edit'
-#    elsif logged_in? && @plant.user != current_user
-#      redirect "/plants"
+    if logged_in? && current_user == @plant.user
+      erb :'plants/edit'
+    elsif logged_in? && @plant.user != current_user
+      redirect "/plants"
     else
       redirect "/login"
     end
   end
 
   post '/plants/:id' do
-    if logged_in?
     @plant = Plant.find(params[:id])
 
+    if logged_in? && current_user == @plant.user
+      
     @plant.update(params.select{|k|k=="name" || k=="water_needed" || k=="light_needed"})
     redirect "/plants/#{@plant.id}"
+
+    elsif logged_in? && @plant.user != current_user
+      redirect "/plants"
+    else
+      redirect "/login"
+    end
+  end
+  # nested if statement, if not the right user
+  # then we need to redirect to /plants index
 
   #    if logged_in? && params[:plant][:name] != ""
   #      @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
@@ -57,10 +68,7 @@ class PlantsController < ApplicationController
   #      redirect "/plants/#{@plant.id}"
   #    elsif logged_in? && params[:plant][:name] == ""
   #      redirect "/plants/#{@plant.id}"
-      else
-        redirect "/login"
-      end
-  end
+
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
@@ -73,9 +81,12 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id/delete' do
-    if logged_in?
-      @plant = Plant.find_by(params[:id])
+    @plant = Plant.find_by(params[:id])
+
+    if logged_in? && @plant.user == current_user
       @plant.delete
+      redirect "/plants"
+    elsif logged_in? && @plant.user != current_user
       redirect "/plants"
     else
       redirect "/login"
