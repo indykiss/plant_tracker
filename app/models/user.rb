@@ -6,15 +6,7 @@ class User < ActiveRecord::Base
 
 
 # Need to validate? Validation method, to restrict
-# Need to add validate to controllers and views 
-
-  #def slug
-  #  self.name.gsub(" ", "-").downcase
-  #end
-
-  #def self.find_by_slug(slug)
-  #   self.all.find{|plant| plant.slug == slug}
-  #end
+# Need to add validate to controllers and views
 
 
 end
