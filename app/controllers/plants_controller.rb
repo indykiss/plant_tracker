@@ -72,12 +72,15 @@ class PlantsController < ApplicationController
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
-  #  if params[:plant][:name] != ""
-      @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed] )
+    @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
       redirect "/plants/#{@plant.id}"
-  #  elsif params[:plant][:name] == ""
-  #    redirect "/plants/#{@plant.id}/edit"
-  #  end
+
+    if !params[:user][:name].empty?
+      @plant.owner = User.create(name: params[:user][:name])
+    end
+    @plant.save
+    redirect to "plants/#{@plant.id}"
+
   end
 
   get '/plants/:id/delete' do
