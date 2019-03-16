@@ -33,11 +33,10 @@ class PlantsController < ApplicationController
 
   get '/plants/:id/edit' do
     @plant = Plant.find(params[:id])
-    binding.pry
 
-    if logged_in? && current_user.id == @plant.user_id
+    if logged_in?
       erb :'plants/edit'
-    elsif logged_in? && current_user.id != @plant.user_id
+    elsif logged_in?
       redirect "/plants"
     else
       redirect "/login"
@@ -47,49 +46,29 @@ class PlantsController < ApplicationController
   post '/plants/:id' do
     @plant = Plant.find(params[:id])
 
-    if logged_in? && current_user.id == @plant.user_id
-
+    if logged_in?
     @plant.update(params.select{|k|k=="name" || k=="water_needed" || k=="light_needed"})
     redirect "/plants/#{@plant.id}"
-
-  elsif logged_in? && current_user.id != @plant.user_id
-      redirect "/plants"
-    else
-      redirect "/login"
+      elsif logged_in?
+        redirect "/plants"
+        else
+          redirect "/login"
     end
   end
-  # nested if statement, if not the right user
-  # then we need to redirect to /plants index
-
-  #    if logged_in? && params[:plant][:name] != ""
-  #      @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
-  #      @plant.user = current_user
-  #      @plant.save
-  #      redirect "/plants/#{@plant.id}"
-  #    elsif logged_in? && params[:plant][:name] == ""
-  #      redirect "/plants/#{@plant.id}"
-
 
   patch '/plants/:id' do
     @plant = Plant.find(params[:id])
     @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
       redirect "/plants/#{@plant.id}"
-
-    if !params[:user][:name].empty?
-      @plant.owner = User.create(name: params[:user][:name])
-    end
-    @plant.save
-    redirect to "plants/#{@plant.id}"
-
   end
 
   get '/plants/:id/delete' do
     @plant = Plant.find_by(params[:id])
 
-    if logged_in? && current_user.id == @plant.user_id
+    if logged_in?
       @plant.delete
       redirect "/plants"
-    elsif logged_in? && current_user.id != @plant.user_id
+    elsif logged_in?
       redirect "/plants"
     else
       redirect "/login"
