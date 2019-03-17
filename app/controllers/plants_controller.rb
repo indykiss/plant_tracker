@@ -18,8 +18,12 @@ class PlantsController < ApplicationController
   end
 
   post '/plants' do
-    @plant = Plant.create(params)
-    erb :'plants/show'
+    if logged_in?
+      @plant = Plant.create(params)
+      erb :'plants/show'
+    else
+     redirect "/login"
+   end
   end
 
   get '/plants/:id' do
@@ -33,6 +37,7 @@ class PlantsController < ApplicationController
 
   get '/plants/:id/edit' do
     @plant = Plant.find(params[:id])
+    binding.pry
 
     if logged_in?
       erb :'plants/edit'

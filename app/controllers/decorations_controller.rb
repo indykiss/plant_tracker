@@ -18,8 +18,12 @@ class DecorationsController < ApplicationController
   end
 
   post '/decorations' do
-    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
+
+    @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
+    binding.pry
+
     erb :'decorations/show'
+
   end
 
   get '/decorations/:id' do
