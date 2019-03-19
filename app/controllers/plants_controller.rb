@@ -37,7 +37,7 @@ class PlantsController < ApplicationController
 
   get '/plants/:id/edit' do
     @plant = Plant.find(params[:id])
-
+binding.pry
     if logged_in?
       # This breaks everything:
       # && current_user.id == @plant.user_id
