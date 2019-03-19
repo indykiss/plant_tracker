@@ -19,15 +19,18 @@ class PlantsController < ApplicationController
 
   post '/plants' do
     if logged_in?
-      @plant = Plant.create(params)
-      erb :'plants/show'
+      @plant = Plant.create(params[:plant])
+      @plant.user_id = current_user.id
+      @plant.save
+      binding.pry
+      redirect "/plants/#{@plant.id}"
     else
-     redirect "/login"
-   end
+      redirect "/login"
+    end
   end
 
   get '/plants/:id' do
-    @plant = Plant.find(params[:id])
+    @plant = Plant.find_by_id(params[:id])
     if logged_in?
       erb :'plants/show'
     else
@@ -36,14 +39,14 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id/edit' do
-    @plant = Plant.find(params[:id])
-binding.pry
+    @plant = Plant.find_by_id(params[:id])
+#binding.pry
     if logged_in?
       # This breaks everything:
       # && current_user.id == @plant.user_id
       erb :'plants/edit'
-    elsif logged_in?
-      redirect "/plants"
+    #elsif logged_in?
+    #  redirect "/plants"
     else
       redirect "/login"
     end
@@ -65,7 +68,7 @@ binding.pry
   end
 
   patch '/plants/:id' do
-    @plant = Plant.find(params[:id])
+    @plant = Plant.find_by_id(params[:id])
     @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
       redirect "/plants/#{@plant.id}"
   end
