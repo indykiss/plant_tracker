@@ -19,9 +19,8 @@ class DecorationsController < ApplicationController
 
   post '/decorations' do
     if logged_in?
-      @decorations = Decoration.create(params[:decoration])
-      @decorations.user = current_user
-      @decorations.save
+      @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color])
+      @decoration.save
       redirect "/decorations/#{@decoration.id}"
     else
       redirect "/login"
@@ -49,7 +48,6 @@ class DecorationsController < ApplicationController
   post '/decorations/:id' do
     if logged_in?
     @decoration = Decoration.find(params[:id])
-
     redirect "/decorations/#{@decoration.id}"
       else
         redirect "/login"
