@@ -8,8 +8,6 @@
     <input type="text" name="dec_name" value="<%= @decoration.dec_name %>"><br>
   <label>Decoration color:</label>
     <input type="text" name="color" value="<%= @decoration.color %>"><br>
-  <label>Plant currently belongs to:</label>
-    <input type="text" value="<%= Plant.all[@decoration.plant_id-1].name %>"><br>
 
     <label> Which plant does this belong in? </label>
       <% Plant.all.each do |plant| %>

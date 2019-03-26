@@ -19,10 +19,10 @@ class DecorationsController < ApplicationController
 
   post '/decorations' do
     if logged_in?
-      @decoration.create(dec_name: params[:dec_name], color: params[:color])
-      @decoration.user_id = current_user.id
+      @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
       @decoration.save
       redirect "/decorations/#{@decoration.id}"
+      binding.pry
     else
       redirect "/login"
     end
@@ -40,7 +40,9 @@ class DecorationsController < ApplicationController
   get '/decorations/:id/edit' do
     @decoration = Decoration.find_by_id(params[:id])
     if logged_in?
-        erb :'decorations/edit'
+      erb :'decorations/edit'
+    elsif logged_in?
+      redirect "/decorations"
     else
       redirect "/login"
     end
@@ -48,23 +50,30 @@ class DecorationsController < ApplicationController
 
   post '/decorations/:id' do
     @decoration = Decoration.find(params[:id])
+
     if logged_in?
+    @decoration.update(params.select{|k|k=="dec_name" || k=="color"})
     redirect "/decorations/#{@decoration.id}"
-      else
-        redirect "/login"
-      end
+      elsif logged_in?
+        redirect "/decorations"
+        else
+          redirect "/login"
+    end
   end
 
   patch '/decorations/:id' do
-    @decoration = Decoration.find(params[:id])
-      @decoration.update(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plants_id])
+    @decoration = Decoration.find_by_id(params[:id])
+    @decoration.update(dec_name: params[:dec_name], color: params[:color])
       redirect "/decorations/#{@decoration.id}"
   end
 
   get '/decorations/:id/delete' do
-    @decoration = Decoration.find(params[:id])
+    @decoration = Decoration.find_by(params[:id])
+
     if logged_in?
       @decoration.delete
+      redirect "/decorations"
+    elsif logged_in?
       redirect "/decorations"
     else
       redirect "/login"
