@@ -22,7 +22,6 @@ class DecorationsController < ApplicationController
       @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
       @decoration.save
       redirect "/decorations/#{@decoration.id}"
-      binding.pry
     else
       redirect "/login"
     end
