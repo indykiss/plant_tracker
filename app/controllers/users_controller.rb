@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
+    #maybe problematic
     redirect_if_not_logged_in
     @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
@@ -29,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
+    #maybe not done?
     if logged_in?
       session.clear
       redirect '/login'

@@ -3,6 +3,7 @@ class PlantsController < ApplicationController
   get "/plants" do
     redirect_if_not_logged_in
     @plants = Plant.all
+    # this binding is to check the edit/ delete button thing
     binding.pry
       erb :"plants/index"
   end
@@ -13,6 +14,7 @@ class PlantsController < ApplicationController
   end
 
   post '/plants' do
+    #maybe problematic
     redirect_if_not_logged_in
     @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
     @plant.user_id = current_user.id
@@ -47,6 +49,7 @@ class PlantsController < ApplicationController
   end
 
   delete '/plants/:id/delete' do
+    #maybe problematic
     redirect_if_not_logged_in
     @plant = Plant.find_by(params[:id])
       if current_user.id == @plant.user_id
