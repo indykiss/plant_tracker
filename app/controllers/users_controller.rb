@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
+    # fix me. redirecting to plants and then login when duplicate email 
     if params[:name] && params[:password] && params[:email]
       @user = User.create(params)
       session[:user_id] = @user.id
@@ -27,8 +28,8 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    @user = User.find_by(name: params[:name])
-      if @user && @user.authenticate(params[:password]) && @user.authenticate(params[:email])
+    @user = User.find_by(email: params[:email])
+      if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
       redirect "/plants"
       else

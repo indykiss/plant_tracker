@@ -1,82 +1,58 @@
 class PlantsController < ApplicationController
 
   get "/plants" do
-    if logged_in?
+    redirect_if_not_logged_in
       @plants = Plant.all
       erb :"plants/index"
-    else
-      redirect "/login"
-    end
   end
 
   get "/plants/new" do
-    if logged_in?
+    redirect_if_not_logged_in
       erb :"plants/new"
-     else
-      redirect "/login"
-    end
   end
 
   post '/plants' do
-    if logged_in?
+    redirect_if_not_logged_in
       @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
       @plant.user_id = current_user.id
-      @plant.save
-      redirect "/plants/#{@plant.id}"
-    else
-      redirect "/login"
-    end
+        if @plant.valid?
+          redirect "/plants/#{@plant.id}"
+        else
+          redirect "/plants/new"
+        end
   end
 
   get '/plants/:id' do
+    redirect_if_not_logged_in
     @plant = Plant.find_by_id(params[:id])
-    if logged_in?
       erb :'plants/show'
-    else
-      redirect "/login"
-    end
   end
 
   get '/plants/:id/edit' do
+    redirect_if_not_logged_in
     @plant = Plant.find_by_id(params[:id])
-    if logged_in? && current_user.id == @plant.user_id
+    if current_user.id == @plant.user_id
       erb :'plants/edit'
-    elsif logged_in?
-      redirect "/plants"
-    else
-      redirect "/login"
-    end
-  end
-
-  post '/plants/:id' do
-    @plant = Plant.find(params[:id])
-
-    if logged_in? && current_user.id == @plant.user_id
-    @plant.update(params.select{|k|k=="name" || k=="water_needed" || k=="light_needed"})
-    redirect "/plants/#{@plant.id}"
-      elsif logged_in?
-        redirect "/plants"
-        else
-          redirect "/login"
     end
   end
 
   patch '/plants/:id' do
     @plant = Plant.find_by_id(params[:id])
-    @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
+    redirect_if_not_logged_in
+
+    if current_user.id == @plant.user_id
+      @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
       redirect "/plants/#{@plant.id}"
+    end
   end
 
-  get '/plants/:id/delete' do
+  delete '/plants/:id/delete' do
     @plant = Plant.find_by(params[:id])
+    redirect_if_not_logged_in
 
-    if logged_in? && current_user.id == @plant.user_id
+    if current_user.id == @plant.user_id
       @plant.delete
       redirect "/plants"
-    elsif logged_in?
-      redirect "/plants"
-    else
-      redirect "/login"
     end
   end
 
