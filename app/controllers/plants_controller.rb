@@ -3,6 +3,7 @@ class PlantsController < ApplicationController
   get "/plants" do
     redirect_if_not_logged_in
     @plants = Plant.all
+    binding.pry
       erb :"plants/index"
   end
 
