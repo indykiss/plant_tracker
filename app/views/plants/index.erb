@@ -6,12 +6,15 @@
 <%= plant.name %><br> belongs to:
 <%= plant.user.name %><br>
 
-<a href="/plants/<%=plant.id %>/edit">Edit</a>
+  <% if current_user == plant.user %>
+    <a href="/plants/<%=plant.id %>/edit">Edit</a>
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete" id="delete">
+    <br><br>
+  <% end %>
 
-<input type="hidden" id="hidden" name="_method" value="delete">
-<input type="submit" value="Delete" id="delete">
-<br><br>
 <% end %>
+
 
 
 <h2> Add a plant here: </h2>

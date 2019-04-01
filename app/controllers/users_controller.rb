@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-  # fix me. redirecting to plants and then login when duplicate email 
+    # fix me. redirecting to plants and then login when duplicate email
     @user = User.new(params)
     if user.save
         session[:user_id] = user.id
