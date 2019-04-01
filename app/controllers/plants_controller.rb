@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
 
   get "/plants" do
     redirect_if_not_logged_in
-      @plants = Plant.all
+    @plants = Plant.all
       erb :"plants/index"
   end
 
@@ -13,13 +13,13 @@ class PlantsController < ApplicationController
 
   post '/plants' do
     redirect_if_not_logged_in
-      @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
-      @plant.user_id = current_user.id
-        if @plant.valid?
-          redirect "/plants/#{@plant.id}"
-        else
-          redirect "/plants/new"
-        end
+    @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
+    @plant.user_id = current_user.id
+      if @plant.valid?
+        redirect "/plants/#{@plant.id}"
+      else
+        redirect "/plants/new"
+      end
   end
 
   get '/plants/:id' do
@@ -37,8 +37,8 @@ class PlantsController < ApplicationController
   end
 
   patch '/plants/:id' do
-    @plant = Plant.find_by_id(params[:id])
     redirect_if_not_logged_in
+    @plant = Plant.find_by_id(params[:id])
 
     if current_user.id == @plant.user_id
       @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
@@ -47,8 +47,8 @@ class PlantsController < ApplicationController
   end
 
   delete '/plants/:id/delete' do
-    @plant = Plant.find_by(params[:id])
     redirect_if_not_logged_in
+    @plant = Plant.find_by(params[:id])
 
     if current_user.id == @plant.user_id
       @plant.delete
