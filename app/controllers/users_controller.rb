@@ -1,39 +1,30 @@
 class UsersController < ApplicationController
 
   get "/signup" do
-    if logged_in?
+    redirect_if_not_logged_in
       redirect "/plants"
-    else
-    erb :"/users/signup"
-   end
   end
 
   post "/signup" do
     # fix me. redirecting to plants and then login when duplicate email
+    redirect_if_not_logged_in
     @user = User.new(params)
-    if user.save
-        session[:user_id] = user.id
-        redirect "/plants"
-    else
-        redirect "/signup"
-    end
+    @user.save
+      session[:user_id] = user.id
+      redirect "/plants"
   end
 
   get "/login" do
-    if logged_in?
+    redirect_if_not_logged_in
       redirect "/plants"
-    else
-      erb :"/users/login"
-    end
   end
 
   post "/login" do
+    redirect_if_not_logged_in
     @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
       redirect "/plants"
-      else
-        redirect "/login"
     end
   end
 
