@@ -3,17 +3,18 @@
 <br><h2>Here are all the plants</h2><br>
 
 <% Plant.all.each do |plant| %>
-<%= plant.name %><br> belongs to:
-<%= plant.user.name %><br>
+<%= plant.name %>
+<%= plant.user %>
 
-  <% if current_user == plant.user %>
+
+<% if current_user == plant.user %>
     <a href="/plants/<%=plant.id %>/edit">Edit</a>
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete" id="delete">
     <br><br>
-  <% end %>
-
 <% end %>
+<% end %>
+
 
 <h2> Add a plant here: </h2>
 <a href="/plants/new">New Plant</a><br><br>

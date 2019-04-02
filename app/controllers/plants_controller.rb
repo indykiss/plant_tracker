@@ -1,10 +1,9 @@
 class PlantsController < ApplicationController
 
   get "/plants" do
-    redirect_if_not_logged_in
+  #  redirect_if_not_logged_in
     @plants = Plant.all
     # this binding is to check the edit/ delete button thing
-    binding.pry
       erb :"plants/index"
   end
 
