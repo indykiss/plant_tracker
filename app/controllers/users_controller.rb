@@ -10,11 +10,22 @@ class UsersController < ApplicationController
 
   post "/signup" do
     # fix me. redirecting to plants and then login when duplicate email
-    @user = User.new(params)
-    @user.save
+    if params[:name] && params[:password] && params[:email]
+      @user = User.create(params)
       session[:user_id] = @user.id
-      redirect "/plants"
+        redirect "/plants"
+    else
+      redirect '/signup'
+    end
   end
+
+#  post "/signup" do
+    # fix me. redirecting to plants and then login when duplicate email
+#    @user = User.new(params)
+#    @user.save
+#      session[:user_id] = @user.id
+#      redirect "/plants"
+#  end
 
   get "/login" do
     redirect_if_not_logged_in
