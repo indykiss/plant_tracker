@@ -19,17 +19,12 @@ class UsersController < ApplicationController
     end
   end
 
-#  post "/signup" do
-    # fix me. redirecting to plants and then login when duplicate email
-#    @user = User.new(params)
-#    @user.save
-#      session[:user_id] = @user.id
-#      redirect "/plants"
-#  end
-
   get "/login" do
-    redirect_if_not_logged_in
+    if logged_in?
       redirect "/plants"
+    else
+      erb :"/users/login"
+    end
   end
 
   post "/login" do
@@ -43,7 +38,6 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    #maybe not done?
     if logged_in?
       session.clear
       redirect '/login'

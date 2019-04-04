@@ -3,16 +3,14 @@
 <br><h2>Here are all the plants</h2><br>
 
 <% Plant.all.each do |plant| %>
-<%= plant.name %>
+<%= plant.name %> by:
 <%= plant.user %>
 <br><br>
 
-<% if current_user == plant.user %>
     <a href="/plants/<%=plant.id %>/edit">Edit</a><br>
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete" id="delete">
     <br><br>
-<% end %>
 <% end %>
 
 

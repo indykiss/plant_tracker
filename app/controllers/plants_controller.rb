@@ -33,18 +33,17 @@ class PlantsController < ApplicationController
   get '/plants/:id/edit' do
     redirect_if_not_logged_in
     @plant = Plant.find_by_id(params[:id])
-    if current_user.id == @plant.user_id
-      erb :'plants/edit'
-    end
+      if current_user.id == @plant.user_id.to_i
+        erb :'plants/edit'
+      end
   end
 
+# I am broken: the patch
   patch '/plants/:id' do
-    redirect_if_not_logged_in
     @plant = Plant.find_by_id(params[:id])
-      if current_user.id == @plant.user_id
-        @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
-        redirect "/plants/#{@plant.id}"
-      end
+    @plant.update(params[:plant])
+    @plant.save
+    redirect "/plants/#{@plant.id}"
   end
 
   delete '/plants/:id/delete' do
