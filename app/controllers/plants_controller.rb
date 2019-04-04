@@ -17,6 +17,8 @@ class PlantsController < ApplicationController
     redirect_if_not_logged_in
     @plant = Plant.create(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
     @plant.user_id = current_user.id
+    @plant.save
+
       if @plant.valid?
         redirect "/plants/#{@plant.id}"
       else
@@ -31,8 +33,8 @@ class PlantsController < ApplicationController
   end
 
   get '/plants/:id/edit' do
-    redirect_if_not_logged_in
     @plant = Plant.find_by_id(params[:id])
+    binding.pry
       if current_user.id == @plant.user_id.to_i
         erb :'plants/edit'
       end
