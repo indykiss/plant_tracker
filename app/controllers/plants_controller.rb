@@ -34,7 +34,6 @@ class PlantsController < ApplicationController
 
   get '/plants/:id/edit' do
     @plant = Plant.find_by_id(params[:id])
-    binding.pry
       if current_user.id == @plant.user_id.to_i
         erb :'plants/edit'
       end
@@ -43,7 +42,7 @@ class PlantsController < ApplicationController
 # I am broken: the patch
   patch '/plants/:id' do
     @plant = Plant.find_by_id(params[:id])
-    @plant.update(params[:plant])
+    @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])
     @plant.save
     redirect "/plants/#{@plant.id}"
   end
