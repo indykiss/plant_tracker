@@ -39,7 +39,6 @@ class PlantsController < ApplicationController
       end
   end
 
-# I am broken: the patch
   patch '/plants/:id' do
     @plant = Plant.find_by_id(params[:id])
     @plant.update(name: params[:name], water_needed: params[:water_needed], light_needed: params[:light_needed])

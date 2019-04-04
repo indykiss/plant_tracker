@@ -3,7 +3,9 @@
 <br><h2>Here are all the decorations</h2><br>
 
 <% Decoration.all.each do |decoration| %>
-<%= decoration.dec_name %><br>
+<%= decoration.dec_name %> belongs to:
+<%= decoration.plant.name %>
+
 <a href="/decorations/<%=decoration.id %>/edit">Edit</a>
 <a href="/decorations/<%=decoration.id %>/delete">Delete</a>
 <br><br>

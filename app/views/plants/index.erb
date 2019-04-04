@@ -9,9 +9,11 @@
 <!-- the next line breaks everyhing! -->
 
 <% if current_user == plant.user %>
-    <a href="/plants/<%=plant.id %>/edit">Edit</a>
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete" id="delete">
+    <a href="/plants/<%= plant.id %>/edit">Edit</a>
+    <form action="/plants/<%= plant.id %>/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Delete</button>
+    </form>
     <br><br>
 <% end %>
 <br>
