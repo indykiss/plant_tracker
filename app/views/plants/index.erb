@@ -4,17 +4,17 @@
 
 <% Plant.all.each do |plant| %>
 <%= plant.name %> by:
-<%= plant.user.name %>
-<br><br>
+<%= plant.user.name %> <br>
 
 <!-- the next line breaks everyhing! -->
 
 <% if current_user == plant.user %>
-    <a href="/plants/<%=plant.id %>/edit">Edit</a><br>
+    <a href="/plants/<%=plant.id %>/edit">Edit</a>
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete" id="delete">
     <br><br>
 <% end %>
+<br>
 <% end %>
 
 
