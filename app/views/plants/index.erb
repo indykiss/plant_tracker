@@ -7,11 +7,16 @@
 <%= plant.user.name %>
 <br><br>
 
+<!-- the next line breaks everyhing! -->
+
+<% if current_user == plant.user %>
     <a href="/plants/<%=plant.id %>/edit">Edit</a><br>
     <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete" id="delete">
     <br><br>
 <% end %>
+<% end %>
+
 
 
 <h2> Add a plant here: </h2>
