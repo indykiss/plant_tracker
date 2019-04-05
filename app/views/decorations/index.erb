@@ -7,7 +7,11 @@
 <%= decoration.plant.name %>
 
 <a href="/decorations/<%=decoration.id %>/edit">Edit</a>
-<a href="/decorations/<%=decoration.id %>/delete">Delete</a>
+<form action="/decorations/<%= decoration.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">Delete</button>
+</form>
+
 <br><br>
 <% end %>
 

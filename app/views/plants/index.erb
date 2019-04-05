@@ -6,7 +6,6 @@
 <%= plant.name %> by:
 <%= plant.user.name %> <br>
 
-<!-- the next line breaks everyhing! -->
 
 <% if current_user == plant.user %>
     <a href="/plants/<%= plant.id %>/edit">Edit</a>

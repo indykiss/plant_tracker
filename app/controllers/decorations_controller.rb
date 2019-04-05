@@ -14,8 +14,13 @@ class DecorationsController < ApplicationController
   post '/decorations' do
     redirect_if_not_logged_in
     @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
+    @decoration.plant_id = current_user.id
     @decoration.save
-      redirect "/decorations/#{@decoration.id}"
+      if @decoration.valid?
+        redirect "/decorations/#{@decoration.id}"
+      else
+        redirect "/decoration/new"
+      end
   end
 
   get '/decorations/:id' do
@@ -33,13 +38,13 @@ class DecorationsController < ApplicationController
   patch '/decorations/:id' do
     redirect_if_not_logged_in
     @decoration = Decoration.find_by_id(params[:id])
-    @decoration.update(dec_name: params[:dec_name], color: params[:color])
+    @decoration.update(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
       redirect "/decorations/#{@decoration.id}"
   end
 
   delete '/decorations/:id/delete' do
     redirect_if_not_logged_in
-    @decoration = Decoration.find_by(params[:id])
+    @decoration = Decoration.find_by_id(params[:id])
     @decoration.delete
       redirect "/decorations"
   end
