@@ -14,7 +14,6 @@ class DecorationsController < ApplicationController
   post '/decorations' do
     redirect_if_not_logged_in
     @decoration = Decoration.create(dec_name: params[:dec_name], color: params[:color], plant_id: params[:plant_id])
-    @decoration.plant_id = current_user.id
     @decoration.save
       if @decoration.valid?
         redirect "/decorations/#{@decoration.id}"

@@ -1,12 +1,21 @@
-<h1> Your plant </h1><br><br>
+<h1> <%= @plant.user.name %>'s plant </h1><br><br>
 
 <h2>Name: <%= @plant.name %> </h2>
 <h4>Water needed: <%= @plant.water_needed %> </h4>
 <h4>Light needed: <%= @plant.light_needed %> </h4>
 
 <br>
+
+<h4> Decorations: </h4>
+<% @plant.decorations.all.each do |decoration| %>
+  <%= decoration.color %> <%= decoration.dec_name %>
+<% end %>
+<br><br>
+
+<% if current_user == @plant.user %>
 <h2> Edit this plant here: </h2>
 <a href="/plants/<%= @plant.id %>/edit">Edit Plant</a>
+<% end %>
 
 <br><br>
 
