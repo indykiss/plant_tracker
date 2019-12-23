@@ -8,8 +8,7 @@ In addition to plants, users can create, read, update or delete decorations for 
 
 # Tech/framework used
 
-Built with: <br>
-Ruby with Sinatra framework, which is a predecessor of Rails in terms of understanding MVC. 
+Built with: Ruby with Sinatra framework, which is a predecessor of Rails in terms of understanding MVC. 
 
 # How to use: 
 
